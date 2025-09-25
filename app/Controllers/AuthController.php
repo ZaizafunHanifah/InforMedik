@@ -9,6 +9,8 @@ class AuthController extends BaseController {
             $model->insert([
                 'nama' => $this->request->getPost('nama'),
                 'password' => password_hash($this->request->getPost('password'), PASSWORD_BCRYPT),
+                'role' => 'user', // tambahkan ini
+                'created_at' => date('Y-m-d H:i:s') // tambahkan ini
             ]);
             return redirect()->to('/login');
         }
@@ -22,7 +24,7 @@ class AuthController extends BaseController {
             if ($user && password_verify($this->request->getPost('password'), $user['password'])) {
                 session()->set('user_id', $user['id']);
                 session()->set('role', $user['role']);
-                return redirect()->to('/kuesioner');
+                return redirect()->to('/dashboard');
             }
             return redirect()->back()->with('error', 'Nama/Password salah');
         }

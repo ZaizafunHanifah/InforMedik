@@ -42,5 +42,24 @@ class KuesionerController extends BaseController {
         return [$total, $level];
     }
 
+    public function history()
+    {
+        $userId = session()->get('user_id');
+        if (!$userId) {
+            return redirect()->to('/login');
+        }
+
+        $model = new HasilModel();
+        $rows = $model->where('user_id', $userId)
+                      ->orderBy('created_at', 'DESC')
+                      ->findAll();
+
+        $data = [
+            'rows' => $rows
+        ];
+
+        return view('kuesioner/history', $data);
+    }
+
     // hitungKecemasan() & hitungStres() serupa
 }

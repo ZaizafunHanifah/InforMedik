@@ -39,8 +39,11 @@ class Logger extends BaseConfig
      *
      * @var int|list<int>
      */
-    public $threshold = (ENVIRONMENT === 'production') ? 4 : 9;
-
+    //public $threshold = (ENVIRONMENT === 'development') ? 4 : 9;
+    public $threshold = [
+        'default' => 'debug',
+        'CI_DEBUG' => 'debug',
+    ];
     /**
      * --------------------------------------------------------------------------
      * Date Format for Logs
