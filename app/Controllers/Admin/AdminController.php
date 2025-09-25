@@ -20,9 +20,14 @@ class AdminController extends BaseController
         $username = $this->request->getPost('username');
         $password = $this->request->getPost('password');
 
+        log_message('debug', 'Admin login attempt: username=' . $username);
+
         $admin = $adminModel->where('username', $username)->first();
 
+        log_message('debug', 'Admin found: ' . ($admin ? 'yes' : 'no'));
+
         if ($admin && password_verify($password, $admin['password'])) {
+            log_message('debug', 'Admin login success');
             $sessionData = [
                 'admin_id'        => $admin['id'],
                 'admin_username'  => $admin['username'],
@@ -31,6 +36,7 @@ class AdminController extends BaseController
             $session->set($sessionData);
             return redirect()->to('/admin/dashboard');
         } else {
+            log_message('debug', 'Admin login failed');
             $session->setFlashdata('error', 'Username atau Password Admin salah.');
             return redirect()->to('/admin/login');
         }

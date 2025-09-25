@@ -1,43 +1,63 @@
-<?php if (session()->getFlashdata('error')): ?>
-    <div style="color:#b00020;margin-bottom:10px;font-size:14px">
-        <?= esc(session()->getFlashdata('error')) ?>
-    </div>
-<?php endif; ?>
-
-<?php if (session()->getFlashdata('success')): ?>
-    <div style="color:#007b00;margin-bottom:10px;font-size:14px">
-        <?= esc(session()->getFlashdata('success')) ?>
-    </div>
-<?php endif; ?>
-
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="id">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Register</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Ataraxia</title>
     <style>
-        body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;margin:0;display:flex;align-items:center;justify-content:center;height:100vh;background:#f7f7f7}
-        .card{background:#fff;padding:20px;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.08);width:320px}
-        input{width:100%;padding:8px;margin:8px 0;border:1px solid #ddd;border-radius:4px}
-        button{width:100%;padding:10px;background:#28a745;color:#fff;border:none;border-radius:4px;cursor:pointer}
-        a{color:#007bff;text-decoration:none}
+        *{box-sizing:border-box;margin:0;padding:0}
+        body{font-family:system-ui,Arial,Helvetica,sans-serif;background:#f8f9fa;min-height:100vh;display:flex;align-items:center;justify-content:center}
+        .card{background:#fff;padding:36px;border-radius:14px;max-width:420px;width:100%;box-shadow:0 10px 30px rgba(0,0,0,.08)}
+        .brand{text-align:center;margin-bottom:18px}
+        .brand h1{font-size:20px;color:#343a40;margin-bottom:6px}
+        .brand p{color:#6c757d;font-size:13px}
+        .form-group{margin-bottom:16px}
+        label{display:block;margin-bottom:6px;color:#495057;font-weight:500;font-size:14px}
+        input[type="text"],input[type="password"]{width:100%;padding:12px 14px;border:1px solid #dee2e6;border-radius:10px;font-size:15px}
+        .btn{width:100%;padding:14px;border-radius:12px;border:0;color:#fff;font-weight:600;cursor:pointer;background-image:linear-gradient(90deg,#4ce7ae 0%,#302592 51%);transition:transform .15s ease}
+        .btn:active{transform:translateY(1px)}
+        .msg{margin-bottom:14px;padding:10px;border-radius:8px;font-size:14px}
+        .msg.error{background:#f8d7da;color:#721c24;border:1px solid #f5c6cb}
+        .link-row{margin-top:12px;text-align:center;color:#6c757d;font-size:14px}
     </style>
 </head>
 <body>
     <div class="card">
-        <h2 style="margin:0 0 12px 0">Daftar</h2>
+        <div class="brand">
+            <h1>Buat Akun Baru — Ataraxia</h1>
+            <p>Daftar dengan nama dan password</p>
+        </div>
 
-        <form method="POST" action="<?= base_url('register') ?>">
+        <?php if (session()->getFlashdata('error')): ?>
+            <div class="msg error"><?= session()->getFlashdata('error') ?></div>
+        <?php endif; ?>
+
+        <form action="http://localhost:8080/register" method="post">
             <?= csrf_field() ?>
-            <input type="text" id="nama" name="nama" placeholder="Nama" required value="<?= esc(old('nama')) ?>">
-            <input type="password" id="password" name="password" placeholder="Password" required>
-            <button type="submit">Daftar</button>
+            <div class="form-group">
+                <label for="nama">Nama</label>
+                <input type="text" id="nama" name="nama">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password">
+            </div>
+
+            <button type="submit" class="btn">Daftar</button>
         </form>
 
-        <p style="text-align:center;margin:12px 0 0 0;font-size:14px">
-            Sudah punya akun? <a href="<?= base_url('login') ?>">Login</a>
-        </p>
+        <div class="link-row">
+            Sudah punya akun? <a href="<?= base_url('/login') ?>">Masuk</a>
+        </div>
     </div>
+
+    <!-- <script>
+    document.querySelector('form').addEventListener('submit', function(e){
+        const btn = document.querySelector('.btn');
+        btn.textContent = 'Memproses...';
+        btn.disabled = true;
+    });
+    </script> -->
 </body>
 </html>

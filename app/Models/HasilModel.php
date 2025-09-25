@@ -3,11 +3,9 @@ namespace App\Models;
 use CodeIgniter\Model;
 
 class HasilModel extends Model {
-    protected $table = 'hasil_kuesioner';
+    protected $table = 'results';
     protected $allowedFields = [
-        'user_id','depresi_score','depresi_level',
-        'kecemasan_score','kecemasan_level',
-        'stres_score','stres_level','created_at'
+        'user_id','skor_stress','skor_kecemasan','skor_depresi','created_at'
     ];
     protected $returnType = 'array';
 }
