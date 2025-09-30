@@ -22,7 +22,7 @@ Ataraxia adalah aplikasi web untuk melakukan skrining mandiri kesehatan mental m
 
 ---
 
-## Kontak
+## Team
 
 * Rizky Amelia Putri (H1D023017)
 * Zaizafun Hanifah Z. H. (H1D023021)
